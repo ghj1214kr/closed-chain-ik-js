@@ -28,7 +28,7 @@
     "start": "concurrently \"cd example && parcel watch ./*.html --dist-dir ../local/ --public-url . --no-cache --no-hmr\" \"static-server\"",
     "build": "cd example && parcel build ./*.html --dist-dir ../dist/ --public-url . --no-cache --no-content-hash",
     "lint": "eslint \"./src/**/*.js\" \"./test/**/*.js\" && tsc -p tsconfig.json --noEmit",
-    "test": "cd test && jest"
+    "test": "cd test && node --experimental-vm-modules ../node_modules/jest/bin/jest.js"
   },
   "repository": {
     "type": "git",
@@ -52,8 +52,6 @@
     "three-mesh-bvh": "^0.6.8"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.7",
-    "@babel/preset-env": "^7.23.8",
     "@types/three": "^0.160.0",
     "concurrently": "^8.2.2",
     "eslint": "^8.56.0",
