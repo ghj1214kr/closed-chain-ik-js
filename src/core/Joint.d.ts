@@ -23,7 +23,7 @@ export class Joint extends Frame {
 
 	dof: Array<number>;
 	dofFlags: Uint8Array;
-	dofValue: Float32Array;
+	dofValues: Float32Array;
 	dofTarget: Float32Array;
 	dofRestPose: Float32Array;
 
