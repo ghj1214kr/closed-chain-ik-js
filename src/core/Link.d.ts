@@ -1,11 +1,9 @@
-import { Frame } from './Frame';
-import { Joint } from './Joint';
+import { Frame } from "./Frame";
+import { Joint } from "./Joint";
 
 export class Link extends Frame {
+	isLink: boolean;
+	closureJoints: Array<Joint>;
 
-	isLink : Boolean;
-	closureJoints : Array<Joint>;
-
-	addChild( child : Joint ) : void;
-
+	addChild(child: Joint): void;
 }

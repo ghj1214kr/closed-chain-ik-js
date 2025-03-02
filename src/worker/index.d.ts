@@ -1,1 +1,1 @@
-export { WorkerSolver } from './WorkerSolver';
+export { WorkerSolver } from "./WorkerSolver";

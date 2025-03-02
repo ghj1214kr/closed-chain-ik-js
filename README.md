@@ -44,41 +44,41 @@ Robitics models used in the project are for demonstration purposes only and subj
 ## Simple 2 DoF System
 
 ```js
-import { Solver, Joint, Link, Goal, DOF } from 'closed-chain-ik';
+import { Solver, Joint, Link, Goal, DOF } from "closed-chain-ik";
 
 // Create links and joints
 const link1 = new Link();
 
 const joint1 = new Joint();
-joint.setDoF( DOF.EZ );
-joint.setPosition( 0, 1, 0 );
-joint.setDoFValues( Math.PI / 4 );
+joint.setDoF(DOF.EZ);
+joint.setPosition(0, 1, 0);
+joint.setDoFValues(Math.PI / 4);
 
 const link2 = new Link();
 
 const joint2 = new Joint();
-joint.setDoF( DOF.EX );
-joint.setPosition( 0, 1, 0 );
-joint.setDoFValues( Math.PI / 4 );
+joint.setDoF(DOF.EX);
+joint.setPosition(0, 1, 0);
+joint.setDoFValues(Math.PI / 4);
 
 const link3 = new Link();
-link3.setPosition( 0, 1, 0 );
+link3.setPosition(0, 1, 0);
 
 // Create the goal
 const goal = new Goal();
-link3.getWorldPosition( goal.position );
-link3.getWorldQuaternion( goal.quaternion );
+link3.getWorldPosition(goal.position);
+link3.getWorldQuaternion(goal.quaternion);
 
 // Create structure
-link1.addChild( joint1 );
-joint1.addChild( link2 );
-link2.addChild( joint2 );
-joint2.addChild( link3 );
+link1.addChild(joint1);
+joint1.addChild(link2);
+link2.addChild(joint2);
+joint2.addChild(link3);
 
-goal.makeClosure( link3 );
+goal.makeClosure(link3);
 
 // create solver
-const solver = new Solver( link1 );
+const solver = new Solver(link1);
 
 // ...
 
@@ -89,11 +89,11 @@ solver.solve();
 ## Using a WebWorker Solver
 
 ```js
-import { WorkerSolve, Joint, Link, Goal, DOF } from 'closed-chain-ik';
+import { WorkerSolve, Joint, Link, Goal, DOF } from "closed-chain-ik";
 
 // ... instantiate kinematic system...
 
-const solver = new WorkerSolver( link1 );
+const solver = new WorkerSolver(link1);
 
 // ...
 
@@ -171,7 +171,7 @@ Takes an array of frames to traverse including the closure joints and links and 
 ### urdfRobotToIKRoot
 
 ```js
-urdfRobotToIKRoot( robot : URDFRobot, trimUnused : Boolean = false ) : Joint
+urdfRobotToIKRoot( robot : URDFRobot, trimUnused : boolean = false ) : Joint
 ```
 
 Generates an IK three based on the provided `URDFRobot` with the root joint having a all 6 degrees of freedom set. Returns the root joint. If `trimUnused` is true then any dangling links that do not connect to non-fixed joints will be removed from the system.
@@ -199,7 +199,7 @@ A base class for `Link`, `Joint`, and `Goal` representing a frame defined by a p
 ### .position
 
 ```js
-position : Float32Array[ 3 ]
+position: Float32Array[3];
 ```
 
 The position of the frame. If this is modified directly `setMatrixNeedsUpdate()` must be called.
@@ -207,7 +207,7 @@ The position of the frame. If this is modified directly `setMatrixNeedsUpdate()`
 ### .quaternion
 
 ```js
-quaternion : Float32Array[ 4 ]
+quaternion: Float32Array[4];
 ```
 
 The orientation of the frame. If this is modified directly `setMatrixNeedsUpdate()` must be called.
@@ -247,7 +247,7 @@ The set of child frames this frame is a parent of.
 ### .setPosition
 
 ```js
-setPosition( x : Number, y : Number, z : Number ) : void
+setPosition( x : number, y : number, z : number ) : void
 ```
 
 Sets the position of the frame.
@@ -255,7 +255,7 @@ Sets the position of the frame.
 ### .setWorldPosition
 
 ```js
-setWorldPosition( x : Number, y : Number, z : Number ) : void
+setWorldPosition( x : number, y : number, z : number ) : void
 ```
 
 Sets the positon of the frame in world space. Automatically computes the local position relative to the parent.
@@ -271,7 +271,7 @@ Gets the position of the frame in the world in the `target` argument.
 ### .setQuaternion
 
 ```js
-setQuaternion( x : Number, y : Number, z : Number, w : Number ) : void
+setQuaternion( x : number, y : number, z : number, w : number ) : void
 ```
 
 Sets the orientation of the frame.
@@ -279,7 +279,7 @@ Sets the orientation of the frame.
 ### .setWorldQuaternion
 
 ```js
-setWorldQuaternion( x : Number, y : Number, z : Number, w : Number ) : void
+setWorldQuaternion( x : number, y : number, z : number, w : number ) : void
 ```
 
 Sets the orientation of the frame in world space. Automatically computes the local orientation relative to the parent.
@@ -295,7 +295,7 @@ Gets the quaternion of the frame in the world in the `target` argument.
 ### .traverseParents
 
 ```js
-traverseParents( callback : ( parent : Frame ) => Boolean ) : void
+traverseParents( callback : ( parent : Frame ) => boolean ) : void
 ```
 
 Fires the given callback for every parent starting with the closest. If `callback` returns true then the traversal is stopped.
@@ -303,7 +303,7 @@ Fires the given callback for every parent starting with the closest. If `callbac
 ### .traverse
 
 ```js
-traverse( callback : ( child : Frame ) => Boolean ) : void
+traverse( callback : ( child : Frame ) => boolean ) : void
 ```
 
 Fires the given callback for every child recursively in breadth first order. If `callback` returns true then the traversal is stopped.
@@ -351,7 +351,7 @@ Updates the local `.matrix` field if it needs to be updated.
 ### .updateMatrixWorld
 
 ```js
-updateMatrixWorld( includeChildren : Boolean = false ) : void
+updateMatrixWorld( includeChildren : boolean = false ) : void
 ```
 
 Updates the local `.matrix` and `.worldMatrix` fields if they need to be updated. Ensures parent matrices are up to date.
@@ -403,7 +403,7 @@ Reference to the joint child.
 ### .isClosure
 
 ```js
-readonly isClosure : Boolean = false
+readonly isClosure : boolean = false
 ```
 
 Whether or not the child relationship is a closure or not.
@@ -475,7 +475,7 @@ The matrix representing the transformation offset due to the current joint value
 ### .targetSet
 
 ```js
-targetSet : Boolean = false
+targetSet: boolean = false;
 ```
 
 When set to `true` [Solver](#Solver) will try to move this joints dofValues towards the target values.
@@ -483,7 +483,7 @@ When set to `true` [Solver](#Solver) will try to move this joints dofValues towa
 ### .restPoseSet
 
 ```js
-restPoseSet : Boolean = false
+restPoseSet: boolean = false;
 ```
 
 When set to `true` [Solver](#Solver) will try to move this joints dofValues towards the rest pose values without compromising the other goals.
@@ -507,11 +507,11 @@ Clears all degrees of freedom.
 ### .set\[ \* \]Values
 
 ```js
-setDoFValues( ...values : Array<Number> ) : void;
-setRestPoseValues( ...values : Array<Number> ) : void;
-setTargetValues( ...values : Array<Number> ) : void;
-setMinLimits( ...values : Array<Number> ) : void;
-setMaxLimits( ...values : Array<Number> ) : void;
+setDoFValues( ...values : Array<number> ) : void;
+setRestPoseValues( ...values : Array<number> ) : void;
+setTargetValues( ...values : Array<number> ) : void;
+setMinLimits( ...values : Array<number> ) : void;
+setMaxLimits( ...values : Array<number> ) : void;
 ```
 
 The number of arguments must match the number of degrees of freedom of the joint.
@@ -519,21 +519,21 @@ The number of arguments must match the number of degrees of freedom of the joint
 ### .set\[ \* \]Value
 
 ```js
-setDoFValue( dof : DOF, value : Number ) : Boolean
-setRestPoseValue( dof : DOF, value : Number ) : Boolean
-setTargetValue( dof : DOF, value : Number ) : Boolean
-setMinLimit( dof : DOF, value : Number ) : Boolean
-setMaxLimit( dof : DOF, value : Number ) : Boolean
+setDoFValue( dof : DOF, value : number ) : boolean
+setRestPoseValue( dof : DOF, value : number ) : boolean
+setTargetValue( dof : DOF, value : number ) : boolean
+setMinLimit( dof : DOF, value : number ) : boolean
+setMaxLimit( dof : DOF, value : number ) : boolean
 ```
 
 ### .get\[ \* \]Value
 
 ```js
-getDoFValue( dof : DOF ) : Number
-getRestPoseValue( dof : DOF ) : Number
-getTargetValue( dof : DOF ) : Number
-getMinLimit( dof : DOF ) : Number
-getMaxLimit( dof : DOF ) : Number
+getDoFValue( dof : DOF ) : number
+getRestPoseValue( dof : DOF ) : number
+getTargetValue( dof : DOF ) : number
+getMinLimit( dof : DOF ) : number
+getMaxLimit( dof : DOF ) : number
 ```
 
 ### .makeClosure
@@ -716,7 +716,7 @@ Takes the set of roots to visualize.
 ### .setJointScale
 
 ```js
-setJointScale( scale : Number ) : this
+setJointScale( scale : number ) : this
 ```
 
 Sets the scale of the joint indicators.
@@ -724,16 +724,15 @@ Sets the scale of the joint indicators.
 ### .setColor
 
 ```js
-setColor( color : Color | String | Number ) : this
+setColor( color : Color | String | number ) : this
 ```
 
 Sets the color of the helper.
 
-
 ### .setDrawThrough
 
 ```js
-setDrawThrough( drawThrough : Boolean ) : this
+setDrawThrough( drawThrough : boolean ) : this
 ```
 
 Sets whether the helper will draw through the environment.
@@ -741,7 +740,7 @@ Sets whether the helper will draw through the environment.
 ### .setResolution
 
 ```js
-setResolution( width : Number, height : Number ) : this
+setResolution( width : number, height : number ) : this
 ```
 
 Sets the resolution of the renderer so the 2d lines can be rendered at the appropriate thickness.

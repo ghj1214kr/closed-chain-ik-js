@@ -1,5 +1,3 @@
-import { WorkerSolver } from './WorkerSolver.js';
+import { WorkerSolver } from "./WorkerSolver.js";
 
-export {
-	WorkerSolver,
-};
+export { WorkerSolver };
