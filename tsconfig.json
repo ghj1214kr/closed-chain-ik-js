@@ -1,16 +1,11 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "noEmit": true,
-    "strict": true,
-    "noUnusedParameters": true,
-    "strictNullChecks":true,
-  },
-  "include": [
-    "src",
-    "test"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+	"compilerOptions": {
+		"baseUrl": ".",
+		"noEmit": true,
+		"strict": true,
+		"noUnusedParameters": true,
+		"strictNullChecks": true
+	},
+	"include": ["src"],
+	"exclude": ["node_modules"]
 }

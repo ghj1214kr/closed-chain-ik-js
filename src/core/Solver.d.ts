@@ -1,32 +1,30 @@
-import { Frame } from './Frame';
-import { SOLVE_STATUS } from './ChainSolver';
+import { Frame } from "./Frame";
+import { SOLVE_STATUS } from "./ChainSolver";
 
 export class Solver {
+	useSVD: boolean;
 
-	useSVD : Boolean;
+	maxIterations: number;
+	stallThreshold: number;
+	dampingFactor: number;
+	divergeThreshold: number;
+	restPoseFactor: number;
 
-	maxIterations : Number;
-	stallThreshold : Number;
-	dampingFactor : Number;
-	divergeThreshold : Number;
-	restPoseFactor : Number;
+	translationConvergeThreshold: number;
+	rotationConvergeThreshold: number;
 
-	translationConvergeThreshold : Number;
-	rotationConvergeThreshold : Number;
+	translationFactor: number;
+	rotationFactor: number;
 
-	translationFactor : Number;
-	rotationFactor : Number;
+	translationStep: number;
+	rotationStep: number;
 
-	translationStep : Number;
-	rotationStep : Number;
+	translationErrorClamp: number;
+	rotationErrorClamp: number;
 
-	translationErrorClamp : Number;
-	rotationErrorClamp : Number;
+	roots: Array<Frame>;
 
-	roots : Array<Frame>;
-
-	constructor( roots : Frame | Array<Frame> );
-	updateStructure() : void;
-	solve() : Array<SOLVE_STATUS>;
-
+	constructor(roots: Frame | Array<Frame>);
+	updateStructure(): void;
+	solve(): Array<SOLVE_STATUS>;
 }

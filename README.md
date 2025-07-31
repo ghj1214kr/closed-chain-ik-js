@@ -44,57 +44,57 @@ Robitics models used in the project are for demonstration purposes only and subj
 ## Simple 2 DoF System
 
 ```js
-import { Solver, Joint, Link, Goal, DOF } from 'closed-chain-ik';
+import { Solver, Joint, Link, Goal, DOF } from "closed-chain-ik";
 
 // Create links and joints
 const link1 = new Link();
 
 const joint1 = new Joint();
-joint.setDoF( DOF.EZ );
-joint.setPosition( 0, 1, 0 );
-joint.setDoFValues( Math.PI / 4 );
+joint.setDoF(DOF.EZ);
+joint.setPosition(0, 1, 0);
+joint.setDoFValues(Math.PI / 4);
 
 const link2 = new Link();
 
 const joint2 = new Joint();
-joint.setDoF( DOF.EX );
-joint.setPosition( 0, 1, 0 );
-joint.setDoFValues( Math.PI / 4 );
+joint.setDoF(DOF.EX);
+joint.setPosition(0, 1, 0);
+joint.setDoFValues(Math.PI / 4);
 
 const link3 = new Link();
-link3.setPosition( 0, 1, 0 );
+link3.setPosition(0, 1, 0);
 
 // Create the goal
 const goal = new Goal();
-link3.getWorldPosition( goal.position );
-link3.getWorldQuaternion( goal.quaternion );
+link3.getWorldPosition(goal.position);
+link3.getWorldQuaternion(goal.quaternion);
 
 // Create structure
-link1.addChild( joint1 );
-joint1.addChild( link2 );
-link2.addChild( joint2 );
-joint2.addChild( link3 );
+link1.addChild(joint1);
+joint1.addChild(link2);
+link2.addChild(joint2);
+joint2.addChild(link3);
 
-goal.makeClosure( link3 );
+goal.makeClosure(link3);
 
 // create solver
-const solver = new Solver( link1 );
+const solver = new Solver(link1);
 
 // ...
 
 // move the goal around and solve
-goal.setPosition( 1, 2, 3 );
+goal.setPosition(1, 2, 3);
 solver.solve();
 ```
 
 ## Using a WebWorker Solver
 
 ```js
-import { WorkerSolve, Joint, Link, Goal, DOF } from 'closed-chain-ik';
+import { WorkerSolve, Joint, Link, Goal, DOF } from "closed-chain-ik";
 
 // ... instantiate kinematic system...
 
-const solver = new WorkerSolver( link1 );
+const solver = new WorkerSolver(link1);
 
 // ...
 
@@ -172,7 +172,7 @@ Takes an array of frames to traverse including the closure joints and links and 
 ### urdfRobotToIKRoot
 
 ```js
-urdfRobotToIKRoot( robot : URDFRobot, trimUnused : Boolean = false ) : Joint
+urdfRobotToIKRoot( robot : URDFRobot, trimUnused : boolean = false ) : Joint
 ```
 
 Generates an IK three based on the provided `URDFRobot` with the root joint having a all 6 degrees of freedom set. Returns the root joint. If `trimUnused` is true then any dangling links that do not connect to non-fixed joints will be removed from the system.
@@ -200,7 +200,7 @@ A base class for `Link`, `Joint`, and `Goal` representing a frame defined by a p
 ### .position
 
 ```js
-position : Float32Array[ 3 ]
+position: Float32Array[3];
 ```
 
 The position of the frame. If this is modified directly `setMatrixNeedsUpdate()` must be called.
@@ -208,7 +208,7 @@ The position of the frame. If this is modified directly `setMatrixNeedsUpdate()`
 ### .quaternion
 
 ```js
-quaternion : Float32Array[ 4 ]
+quaternion: Float32Array[4];
 ```
 
 The orientation of the frame. If this is modified directly `setMatrixNeedsUpdate()` must be called.
@@ -296,7 +296,7 @@ Gets the quaternion of the frame in the world in the `target` argument.
 ### .traverseParents
 
 ```js
-traverseParents( callback : ( parent : Frame ) => Boolean ) : void
+traverseParents( callback : ( parent : Frame ) => boolean ) : void
 ```
 
 Fires the given callback for every parent starting with the closest. If `callback` returns true then the traversal is stopped.
@@ -304,7 +304,7 @@ Fires the given callback for every parent starting with the closest. If `callbac
 ### .traverse
 
 ```js
-traverse( callback : ( child : Frame ) => Boolean ) : void
+traverse( callback : ( child : Frame ) => boolean ) : void
 ```
 
 Fires the given callback for every child recursively in breadth first order. If `callback` returns true then the traversal is stopped.
@@ -352,7 +352,7 @@ Updates the local `.matrix` field if it needs to be updated.
 ### .updateMatrixWorld
 
 ```js
-updateMatrixWorld( includeChildren : Boolean = false ) : void
+updateMatrixWorld( includeChildren : boolean = false ) : void
 ```
 
 Updates the local `.matrix` and `.worldMatrix` fields if they need to be updated. Ensures parent matrices are up to date.
@@ -404,7 +404,7 @@ Reference to the joint child.
 ### .isClosure
 
 ```js
-readonly isClosure : Boolean = false
+readonly isClosure : boolean = false
 ```
 
 Whether or not the child relationship is a closure or not.
@@ -476,7 +476,7 @@ The matrix representing the transformation offset due to the current joint value
 ### .targetSet
 
 ```js
-targetSet : Boolean = false
+targetSet: boolean = false;
 ```
 
 When set to `true` [Solver](#Solver) will try to move this joints dofValues towards the target values.
@@ -484,7 +484,7 @@ When set to `true` [Solver](#Solver) will try to move this joints dofValues towa
 ### .restPoseSet
 
 ```js
-restPoseSet : Boolean = false
+restPoseSet: boolean = false;
 ```
 
 When set to `true` [Solver](#Solver) will try to move this joints dofValues towards the rest pose values without compromising the other goals.
@@ -520,11 +520,11 @@ The number of arguments must match the number of degrees of freedom of the joint
 ### .set\[ \* \]Value
 
 ```js
-setDoFValue( dof : DOF, value : Number ) : Boolean
-setRestPoseValue( dof : DOF, value : Number ) : Boolean
-setTargetValue( dof : DOF, value : Number ) : Boolean
-setMinLimit( dof : DOF, value : Number ) : Boolean
-setMaxLimit( dof : DOF, value : Number ) : Boolean
+setDoFValue( dof : DOF, value : Number ) : boolean
+setRestPoseValue( dof : DOF, value : Number ) : boolean
+setTargetValue( dof : DOF, value : Number ) : boolean
+setMinLimit( dof : DOF, value : Number ) : boolean
+setMaxLimit( dof : DOF, value : Number ) : boolean
 ```
 
 ### .get\[ \* \]Value
@@ -725,16 +725,15 @@ Sets the scale of the joint indicators.
 ### .setColor
 
 ```js
-setColor( color : Color | String | Number ) : this
+setColor( color : Color | string | Number ) : this
 ```
 
 Sets the color of the helper.
 
-
 ### .setDrawThrough
 
 ```js
-setDrawThrough( drawThrough : Boolean ) : this
+setDrawThrough( drawThrough : boolean ) : this
 ```
 
 Sets whether the helper will draw through the environment.

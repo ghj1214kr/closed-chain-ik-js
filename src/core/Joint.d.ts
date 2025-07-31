@@ -1,74 +1,79 @@
-import { Frame } from './Frame';
-import { Link } from './Link';
+import { Frame } from "./Frame";
+import { Link } from "./Link";
 
-export const enum DOF { X, Y, Z, EX, EY, EZ }
+export const enum DOF {
+	X,
+	Y,
+	Z,
+	EX,
+	EY,
+	EZ,
+}
 
-export const DOF_NAMES : Array<String>;
+export const DOF_NAMES: Array<string>;
 
 export class Joint extends Frame {
+	isJoint: boolean;
 
-	isJoint : Boolean;
+	child: Link;
+	isClosure: boolean;
 
-	child : Link;
-	isClosure : Boolean;
+	rotationDoFCount: number;
+	translationDoFCount: number;
 
-	rotationDoFCount : Number;
-	translationDoFCount : Number;
+	dof: Array<number>;
+	dofFlags: Uint8Array;
+	dofValue: Float32Array;
+	dofTarget: Float32Array;
+	dofRestPose: Float32Array;
 
-	dof : Array<Number>;
-	dofFlags : Uint8Array;
-	dofValue : Float32Array;
-	dofTarget : Float32Array;
-	dofRestPose : Float32Array;
+	minDoFLimit: Float32Array;
+	maxDoFLimit: Float32Array;
 
-	minDoFLimit : Float32Array;
-	maxDoFLimit : Float32Array;
+	targetSet: boolean;
+	restPoseSet: boolean;
 
-	targetSet : Boolean;
-	restPoseSet : Boolean;
+	matrixDoF: Float32Array;
 
-	matrixDoF : Float32Array;
+	clearDoF(): void;
+	setDoF(...args: Array<DOF>): void;
 
-	clearDoF() : void;
-	setDoF( ...args : Array<DOF> ) : void;
+	setDoFValues(...args: Array<number>): void;
+	setDoFValue(dof: DOF, value: number): boolean;
+	setDoFQuaternion(x: number, y: number, z: number, w: number): void;
+	getDoFValue(dof: DOF): number;
+	getDoFQuaternion(quat: Array<number>): void;
+	getDoFEuler(euler: Array<number>): void;
+	getDoFPosition(position: Array<number>): void;
 
-	setDoFValues( ...args : Array<Number> ) : void;
-	setDoFValue( dof : DOF, value : Number ) : Boolean;
-	setDoFQuaternion( x : Number, y : Number, z : Number, w : Number ) : void;
-	getDoFValue( dof : DOF ) : Number;
-	getDoFQuaternion( quat : Array<Number> ) : void;
-	getDoFEuler( euler : Array<Number> ) : void;
-	getDoFPosition( position : Array<Number> ) : void;
+	setRestPoseValues(...args: Array<number>): void;
+	setRestPoseValue(dof: DOF, value: number): boolean;
+	getRestPoseValue(dof: DOF): number;
+	getRestPoseQuaternion(quat: Array<number>): void;
+	getRestPoseEuler(euler: Array<number>): void;
+	getRestPosePosition(position: Array<number>): void;
 
-	setRestPoseValues( ...args : Array<Number> ) : void;
-	setRestPoseValue( dof : DOF, value : Number ) : Boolean;
-	getRestPoseValue( dof : DOF ) : Number;
-	getRestPoseQuaternion( quat : Array<Number> ) : void;
-	getRestPoseEuler( euler : Array<Number> ) : void;
-	getRestPosePosition( position : Array<Number> ) : void;
+	setTargetValues(...args: Array<number>): void;
+	setTargetValue(dof: DOF, value: number): boolean;
+	getTargetValue(dof: DOF): number;
+	getTargetQuaternion(quat: Array<number>): void;
+	getTargetEuler(euler: Array<number>): void;
+	getTargetPosition(position: Array<number>): void;
 
-	setTargetValues( ...args : Array<Number> ) : void;
-	setTargetValue( dof : DOF, value : Number ) : Boolean;
-	getTargetValue( dof : DOF ) : Number;
-	getTargetQuaternion( quat : Array<Number> ) : void;
-	getTargetEuler( euler : Array<Number> ) : void;
-	getTargetPosition( position : Array<Number> ) : void;
+	setMinLimits(...args: Array<number>): void;
+	setMinLimt(dof: DOF, value: number): void;
+	getMinLimit(dof: DOF): number;
 
-	setMinLimits( ...args : Array<Number> ) : void;
-	setMinLimt( dof : DOF, value : Number ) : void;
-	getMinLimit( dof : DOF ) : Number;
+	setMaxLimits(...args: Array<number>): void;
+	setMaxLimt(dof: DOF, value: number): void;
+	getMaxLimit(dof: DOF): number;
 
-	setMaxLimits( ...args : Array<Number> ) : void;
-	setMaxLimt( dof : DOF, value : Number ) : void;
-	getMaxLimit( dof : DOF ) : Number;
+	setMatrixDoFNeedsUpdate(): void;
+	updateDoFMatrix(): void;
 
-	setMatrixDoFNeedsUpdate() : void;
-	updateDoFMatrix() : void;
-
-	makeClosure( child : Link ) : void;
-	addChild( child : Link ) : void;
-	removeChild( child : Link ) : void;
-	attachChild( child : Link ) : void;
-	detachChild( child : Link ) : void;
-
+	makeClosure(child: Link): void;
+	addChild(child: Link): void;
+	removeChild(child: Link): void;
+	attachChild(child: Link): void;
+	detachChild(child: Link): void;
 }
