@@ -42,7 +42,7 @@
 	"dependencies": {
 		"gl-matrix": "^3.4.3",
 		"linear-solve": "^1.2.1",
-		"svd-js": "^1.2.1"
+		"svd-js": "^1.1.1"
 	},
 	"devDependencies": {
 		"@types/three": "^0.178.0",
