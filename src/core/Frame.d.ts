@@ -33,5 +33,5 @@ export class Frame {
 	setMatrixNeedsUpdate(): void;
 	setMatrixWorldNeedsUpdate(): void;
 	updateMatrix(): void;
-	updateMatrixWorld(): void;
+	updateMatrixWorld(updateChildren: boolean): void;
 }
